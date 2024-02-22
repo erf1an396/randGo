@@ -1,33 +1,40 @@
 package main
 
-import "fmt"
-
 type User struct {
 	ID   uint
 	Name string
 }
 
-func main() {
-	i := new(int)
-	fmt.Printf("type of i : %T\n", i)
+func square(i int) int {
+	//if i > 9988 && i < 9999 {
+	//	return i
+	//}
+	return i * i
+}
 
-	u := new(User)
-	fmt.Printf("type of u : %T\n", u)
-
-	u.ID = 2
-	u.Name = "erfan"
-
-	fmt.Printf("u.id , u.name : %+v, %+v\n", u.ID, u.Name)
-	uu := &User{
-		ID:   1,
-		Name: "erfan",
+func dayOfWeek(i int) string {
+	switch i {
+	case 1:
+		return "shanbe"
+	case 2:
+		return "yeshanbe"
+	case 3:
+		return "doshanbe"
+	case 4:
+		return "seshanbe"
+	case 5:
+		return "charshanbe"
+	case 6:
+		return "panjshanbe"
+	case 7:
+		return "jomeh"
+	default:
+		return ""
 	}
-	fmt.Printf("type of uu :%T\n", uu)
+}
 
-	var uuu *User
-	fmt.Printf("type of uuu:%T\n", uuu)
-
-	fmt.Println("u.ID", u.ID)
-	fmt.Println("uu.ID", uu.ID)
-	//fmt.Println("uuu.ID", uuu.ID)
+func main() {
+	u := new(User)
+	u.ID = 1
+	u.Name = "eric"
 }
