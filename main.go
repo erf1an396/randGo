@@ -1,37 +1,16 @@
 package main
 
-import (
-	"fmt"
-	_ "run/setup2"
-
-	_ "run/setup"
-)
+import "fmt"
 
 func main() {
-	fmt.Println("Bye")
-	output := call(func(s string, i int) bool {
-		fmt.Println("i", i)
-		return s == "hello"
 
-	})
-	fmt.Println("out", output)
-}
+	i := 0
 
-type eri int
-
-type sFunc func(string, int) bool
-
-func pr(s string, _ int) bool {
-
-	return s == "hello"
-}
-
-func call(f sFunc) string {
-	result := f("hello", 4)
-
-	if result == true {
-		return "yse"
+start:
+	fmt.Println("i", i)
+	i++
+	if i < 10 {
+		goto start
 	}
-
-	return "no"
+	fmt.Println("Finish")
 }
