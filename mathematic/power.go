@@ -2,9 +2,16 @@ package mathematic
 
 import "math"
 
-func PoewrH(base, power float64) float64 {
+func PowerH(base, power float64) float64 {
+	if base == 0 {
+		return 0
+	}
+
+	if power < 0 {
+		return 1 / PowerH(base, 0-power)
+	}
 	sum := float64(1)
-	for i := 0.0; i < power; i++ {
+	for i := float64(0); i < power; i++ {
 		sum *= base
 	}
 	return sum

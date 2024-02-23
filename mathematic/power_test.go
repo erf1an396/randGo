@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestPoewrH(t *testing.T) {
+func TestPowerH(t *testing.T) {
 	type test struct {
 		Base           float64
 		Power          float64
@@ -13,13 +13,15 @@ func TestPoewrH(t *testing.T) {
 	}
 
 	testCases := []test{
+		{Base: 2, Power: -4, ExpectedResult: float64(1) / 16},
+		{Base: 2, Power: -1, ExpectedResult: float64(1) / 2},
 		{Base: 2, Power: 0, ExpectedResult: 1},
 		{Base: 2, Power: 1, ExpectedResult: 2},
 		{Base: 2, Power: 2, ExpectedResult: 4},
 		{Base: 2, Power: 5, ExpectedResult: 32},
 	}
 	for _, c := range testCases {
-		res := PoewrH(c.Base, c.Power)
+		res := PowerH(c.Base, c.Power)
 		if res != c.ExpectedResult {
 			t.Errorf("expected: %f, result: %f\n", c.ExpectedResult, res)
 		}
@@ -49,9 +51,9 @@ func TestMathPow(t *testing.T) {
 
 var result float64
 
-func BenchmarkPoewrH(b *testing.B) {
+func BenchmarkPowerH(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		res := PoewrH(2, 4)
+		res := PowerH(2, 4)
 		result = res
 	}
 }
