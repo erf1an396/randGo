@@ -1,21 +1,32 @@
 package main
 
 import (
-	"run/appp"
-	"run/new_in_memory"
-	"run/userr"
+	"fmt"
+	"reflect"
+	"run/richerror"
+	"time"
 )
 
 func main() {
-	//var a = &storagee.Memory{}
-	var newMemoryStorage = &new_in_memory.Store{}
-	appplication := appp.App{
-		Name:        "sample-apppp",
-		UserStorage: newMemoryStorage,
+	rErr := richerror.RichError{
+		Message: "id is not valid",
+		MetaData: map[string]string{
+			"id": "0",
+		},
+		Operation: "main",
+		Time:      time.Now(),
 	}
 
-	appplication.CreateUser(userr.User{
-		ID:   1,
-		Name: "Erfan",
-	})
+	value := reflect.ValueOf(rErr)
+	switch value.Kind() {
+	case reflect.Struct:
+		fmt.Println("number of field", value.NumField())
+		for i := 0; i < value.NumField(); i++ {
+
+			fmt.Printf("field index: %d, type: %s , value: %s/n", i,
+				value.Type().Field(i).Type,
+				value.Type().Field(i).Name,
+			)
+		}
+	}
 }
