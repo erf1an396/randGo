@@ -1,32 +1,46 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"reflect"
-	"run/richerror"
-	"time"
 )
 
 func main() {
-	rErr := richerror.RichError{
-		Message: "id is not valid",
-		MetaData: map[string]string{
-			"id": "0",
-		},
-		Operation: "main",
-		Time:      time.Now(),
-	}
 
-	value := reflect.ValueOf(rErr)
-	switch value.Kind() {
-	case reflect.Struct:
-		fmt.Println("number of field", value.NumField())
-		for i := 0; i < value.NumField(); i++ {
+}
 
-			fmt.Printf("field index: %d, type: %s , value: %s/n", i,
-				value.Type().Field(i).Type,
-				value.Type().Field(i).Name,
-			)
-		}
-	}
+func String(err error) string {
+
+	return fmt.Sprintln(err.Error())
+
+}
+
+func StringTwo(err error) string {
+
+	return fmt.Sprintln(err)
+
+}
+
+type simpleData struct {
+	ID    uint
+	Name  string
+	Email string
+}
+
+func (s simpleData) MarshalJSON() ([]byte, error) {
+	return []byte(fmt.Sprintf(`{"id": %d, "name": %s, "email": %s}`, s.ID, s.Name, s.Email)), nil
+}
+
+type simpleDataTwo struct {
+	ID    uint
+	Name  string
+	Email string
+}
+
+func Json(data simpleData) ([]byte, error) {
+	return json.Marshal(data)
+}
+
+func JsonTwo(data simpleDataTwo) ([]byte, error) {
+	return json.Marshal(data)
 }
