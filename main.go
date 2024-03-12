@@ -1,46 +1,36 @@
 package main
 
-import (
-	"encoding/json"
-	"fmt"
-)
+import "fmt"
 
 func main() {
 
-}
+	var users = map[string]int{}
 
-func String(err error) string {
+	users["Hossein Nazari"] = 2
 
-	return fmt.Sprintln(err.Error())
+	fmt.Println(users["Hossein Nazari"])
 
-}
+	var u = map[int]int{}
 
-func StringTwo(err error) string {
+	value, ok := u[3]
+	if !ok {
+		fmt.Println("the key doesn't exist")
+	} else {
+		fmt.Println("the value", value)
+	}
 
-	return fmt.Sprintln(err)
+	type user struct {
+		ID    int
+		Name  string
+		Email string
+	}
 
-}
+	var userL = make(map[user]int)
 
-type simpleData struct {
-	ID    uint
-	Name  string
-	Email string
-}
+	userL[user{
+		ID:    1,
+		Name:  "erfan",
+		Email: "eric@",
+	}] = 100
 
-func (s simpleData) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf(`{"id": %d, "name": %s, "email": %s}`, s.ID, s.Name, s.Email)), nil
-}
-
-type simpleDataTwo struct {
-	ID    uint
-	Name  string
-	Email string
-}
-
-func Json(data simpleData) ([]byte, error) {
-	return json.Marshal(data)
-}
-
-func JsonTwo(data simpleDataTwo) ([]byte, error) {
-	return json.Marshal(data)
 }
